@@ -1,30 +1,22 @@
-<%= form_with model: user do |form| %>
-    <div>
-      <%= form.label :username %><br>
-      <%= form.text_field :username %>
-      <% user.errors.full_messages_for(:username).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
+<%= form_with model: user do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-    <div>
-      <%= form.label :email %><br>
-      <%= form.text_field :email %>
-      <% user.errors.full_messages_for(:email).each do |message| %>
-        <div><%= message %></div>
+    <ul>
+      <% user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
       <% end %>
+    </ul>
     </div>
+  <% end %>
   
-    <div>
-      <%= form.label :password %><br>
-      <%= form.text_field :password %><br>
-      <% user.errors.full_messages_for(:password).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-
-    <div>
-      <%= form.submit %>
-    </div>
+  <%= f.label(:username) %>
+  <%= f.text_field(:username, placeholder: 'rocketracoon42') %><br>
+  <%= f.label(:email) %>
+  <%= f.text_field(:email, placeholder: 'racoon42@email.com') %><br>
+  <%= f.label(:password) %>
+  <%= f.password_field(:password, placeholder: 'password42') %><br>
+  <%= f.submit('Submit') %>
 <% end %>
   
