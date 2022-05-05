@@ -1,3 +1,23 @@
-<h1>New User Form</h1>
+<h1>New User</h1>
+<% user = @user %>
+<%= form_with model: user do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-<%= render partial: "form", locals: {user: @user} %>
+    <ul>
+      <% user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+    </div>
+  <% end %>
+  
+  <%= f.label(:Username) %>
+  <%= f.text_field(:username, placeholder: 'rocketracoon42') %><br>
+  <%= f.label 'Email' %>
+  <%= f.text_field(:email, placeholder: 'racoon42@email.com') %><br>
+  <%= f.label 'Password' %>
+  <%= f.password_field(:password, placeholder: 'password42') %><br>
+  <%= f.submit('Create') %>
+<% end %>
